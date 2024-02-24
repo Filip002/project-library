@@ -28,7 +28,7 @@ namespace LibraryAPI.Services
             var book = _dbContext
                 .Books
                 .Include(b => b.Author)
-                //.Include(b => b.Categories)
+                .Include(b => b.Categories)
                 .FirstOrDefault(b => b.Id == id);
 
             if (book is null)
@@ -42,8 +42,8 @@ namespace LibraryAPI.Services
         {
             var books = _dbContext
                 .Books
-                .Include(b => b.Author);
-                //.Include(b => b.Categories);
+                .Include(b => b.Author)
+                .Include(b => b.Categories);
 
             var booksDtos = _mapper.Map<List<BookDto>>(books);
             return booksDtos;

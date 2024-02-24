@@ -11,6 +11,6 @@ namespace LibraryAPI.Models
         public bool IsAvailable { get; set; }
         public string AuthorName { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public List<CategoryDto> Categories { get; set; }
     }
 }

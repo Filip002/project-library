@@ -10,6 +10,9 @@ namespace LibraryAPI
         {
             CreateMap<Book, BookDto>()
                 .ForMember(m => m.AuthorName, c => c.MapFrom(s => s.Author.Name));
+
+
+            CreateMap<Category, CategoryDto>();        
         }
     }
 }
