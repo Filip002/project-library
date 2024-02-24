@@ -9,6 +9,7 @@ namespace LibraryAPI.Services
     public interface IBookService
     {
         BookDto GetById(int id);
+        IEnumerable<BookDto> GetAll();
     }
 
     public class BookService : IBookService
@@ -27,7 +28,7 @@ namespace LibraryAPI.Services
             var book = _dbContext
                 .Books
                 .Include(b => b.Author)
-                .Include(b => b.Categories)
+                //.Include(b => b.Categories)
                 .FirstOrDefault(b => b.Id == id);
 
             if (book is null)
@@ -35,6 +36,17 @@ namespace LibraryAPI.Services
 
             var result = _mapper.Map<BookDto>(book);
             return result;
+        }
+
+        public IEnumerable<BookDto> GetAll()
+        {
+            var books = _dbContext
+                .Books
+                .Include(b => b.Author);
+                //.Include(b => b.Categories);
+
+            var booksDtos = _mapper.Map<List<BookDto>>(books);
+            return booksDtos;
         }
     }
 }

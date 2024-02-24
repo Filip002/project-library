@@ -22,5 +22,13 @@ namespace LibraryAPI.Controllers
             return Ok(book);
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<BookDto>> GetAll()
+        {
+            var books = _bookService.GetAll();
+
+            return Ok(books);
+        }
+
     }
 }
