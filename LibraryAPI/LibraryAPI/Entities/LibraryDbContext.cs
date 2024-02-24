@@ -2,7 +2,7 @@
 
 namespace LibraryAPI.Entities
 {
-    public class BookDbContext : DbContext
+    public class LibraryDbContext : DbContext
     {
         private string _connectionString =
            "Server=(localdb)\\mssqllocaldb;Database=LibraryDb;Trusted_Connection=True;";
