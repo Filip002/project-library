@@ -11,8 +11,13 @@ namespace LibraryAPI
             CreateMap<Book, BookDto>()
                 .ForMember(m => m.AuthorName, c => c.MapFrom(s => s.Author.Name));
 
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CreateBookDto, Book>()
+                .ForMember(m => m.Author,
+                    c => c.MapFrom(dto => new Author() 
+                    { Name = dto.AuthorName }));
 
-            CreateMap<Category, CategoryDto>();        
+            CreateMap<CategoryDto, Category>();
         }
     }
 }

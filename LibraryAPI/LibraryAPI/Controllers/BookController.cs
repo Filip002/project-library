@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryAPI.Controllers
 {
     [Route("api/book")]
+    [ApiController]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
@@ -30,5 +31,28 @@ namespace LibraryAPI.Controllers
             return Ok(books);
         }
 
+        [HttpPost]
+        public ActionResult CreateBook([FromBody]CreateBookDto dto)
+        {
+            var id = _bookService.Create(dto);
+
+            return Created($"/api/book/{id}", null);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            _bookService.DeleteById(id);
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update([FromRoute]int id, [FromBody]UpdateBookDto dto)
+        {
+            _bookService.Update(id, dto);
+
+            return Ok();
+        }
     }
 }
