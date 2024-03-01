@@ -7,6 +7,6 @@
         public string ConfirmPassword { get; set; }
         public string Name { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public int RoleId { get; set; } = 1;
+        public int RoleId { get; set; } = 2;
     }
 }
