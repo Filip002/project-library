@@ -2,9 +2,14 @@ using LibraryAPI;
 using LibraryAPI.Entities;
 using LibraryAPI.Middleware;
 using LibraryAPI.Services;
+using NLog.Web;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
 
 // Add services to the container.
 
