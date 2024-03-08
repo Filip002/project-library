@@ -1,6 +1,10 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using LibraryAPI;
 using LibraryAPI.Entities;
 using LibraryAPI.Middleware;
+using LibraryAPI.Models;
+using LibraryAPI.Models.Validators;
 using LibraryAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -37,7 +41,7 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<LibraryDbContext>();
 builder.Services.AddScoped<LibrarySeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -45,6 +49,7 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
