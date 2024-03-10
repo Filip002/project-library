@@ -1,0 +1,3 @@
+[submodule "frontend-library"]
+	path = frontend-library
+	url = https://github.com/Filip002/library-frontend.git
