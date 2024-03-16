@@ -33,7 +33,7 @@ namespace LibraryAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult CreateBook([FromBody]CreateBookDto dto)
         {
             var id = _bookService.Create(dto);
@@ -42,7 +42,7 @@ namespace LibraryAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             _bookService.DeleteById(id);
@@ -51,7 +51,7 @@ namespace LibraryAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Update([FromRoute]int id, [FromBody]UpdateBookDto dto)
         {
             _bookService.Update(id, dto);
