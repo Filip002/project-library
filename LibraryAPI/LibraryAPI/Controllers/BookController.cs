@@ -25,9 +25,9 @@ namespace LibraryAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BookDto>> GetAll()
+        public ActionResult<IEnumerable<BookDto>> GetAll([FromQuery] BookQuery query)
         {
-            var books = _bookService.GetAll();
+            var books = _bookService.GetAll(query);
 
             return Ok(books);
         }

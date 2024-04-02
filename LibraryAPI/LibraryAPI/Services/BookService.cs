@@ -9,7 +9,7 @@ namespace LibraryAPI.Services
     public interface IBookService
     {
         BookDto GetById(int id);
-        IEnumerable<BookDto> GetAll();
+        IEnumerable<BookDto> GetAll(BookQuery query);
         int Create(CreateBookDto dto);
         void DeleteById(int id);
         void Update(int id, UpdateBookDto dto);
@@ -51,12 +51,14 @@ namespace LibraryAPI.Services
             return result;
         }
 
-        public IEnumerable<BookDto> GetAll()
+        public IEnumerable<BookDto> GetAll(BookQuery query)
         {
             var books = _dbContext
                 .Books
                 .Include(b => b.Author)
-                .Include(b => b.Categories);
+                .Include(b => b.Categories)
+                .Where(b => query.SearchPhrase == null || b.Title.ToLower().Contains(query.SearchPhrase.ToLower())
+                    || b.Description.ToLower().Contains(query.SearchPhrase.ToLower()));
 
             var booksDtos = _mapper.Map<List<BookDto>>(books);
             return booksDtos;
